@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.hoverFill {
+  background: linear-gradient(to left, white 50%, #3cd157 50%) right;
+  background-size: 200%;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.3s ease-in-out;
+}
+
+.hoverFillSignUp {
+  background: linear-gradient(to left, black 50%, #3cd157 50%) right;
+  background-size: 200%;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.3s ease-in-out;
+}
+
+.workoutImg {
+  background: linear-gradient(
+      185deg,
+      rgba(102, 102, 102, 0.75),
+      rgba(29, 182, 44, 0.228)
+    ),
+    url(/src/imgs/dumbells.webp);
+  background-size: cover;
+  height: 280px;
+  background-position: 0 69%;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.76);
+}
+
+.veggiesImg {
+  background: linear-gradient(
+      370deg,
+      rgba(56, 55, 55, 0.75),
+      rgba(44, 130, 59, 0.628)
+    ),
+    url(/src/imgs/veggies.webp);
+  background-size: cover;
+  height: 280px;
+  background-position: 0 69%;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.76);
+}
