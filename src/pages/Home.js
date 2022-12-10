@@ -22,7 +22,7 @@ const Home = () => {
   };
 
   return (
-    <div className="h-screen bg-gray-300">
+    <div>
       <header>
         <Link
           className="font-sans text-4xl font-bold cursor-pointer hoverFillSignUp hover:bg-left"

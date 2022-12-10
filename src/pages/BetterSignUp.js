@@ -5,7 +5,8 @@ const BetterSignUp = () => {
   const navigate = useNavigate();
   const emailRef = useRef();
   const passwordRef = useRef();
-  const nameRef = useRef();
+
+  const [name, setName] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -14,7 +15,6 @@ const BetterSignUp = () => {
 
     const enteredEmail = emailRef.current.value;
     const enteredPassword = passwordRef.current.value;
-    const enteredName = nameRef.current.value;
 
     setIsLoading(true);
 
@@ -27,18 +27,19 @@ const BetterSignUp = () => {
           email: enteredEmail,
           password: enteredPassword,
           returnSecureToken: true,
-          displayName: enteredName,
+          displayName: name,
         }),
       }
     );
 
     setIsLoading(false);
+
     if (res.ok) {
       console.log(res);
     } else {
       const data = await res.json();
       let errorMessage = "Auhentication failed";
-      if (data && data.error && data.error.message) {
+      if (data?.error?.message) {
         errorMessage = data.error.message;
       }
       alert(errorMessage);
@@ -86,7 +87,8 @@ const BetterSignUp = () => {
                   Name
                 </label>
                 <input
-                  ref={nameRef}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   type="name"
                   id="name"
                   name="name"

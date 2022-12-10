@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import SCROLL from "../../utils/SCROLL";
+import Scroll from "../../utils/Scroll";
 import Header from "./Header";
 
 import classes from "./Main.module.css";
@@ -26,7 +26,7 @@ const Main = () => {
       <div className={classes.grid}>
         <div className={classes.left}>
           <Header />
-          <SCROLL />
+          <Scroll />
           <div className={classes.container}>
             <h1 className="font-sans font-bold">Welcome to TRACKr!</h1>
             <p className={classes.numHeader}>01</p>

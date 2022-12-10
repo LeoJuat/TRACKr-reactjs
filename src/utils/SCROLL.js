@@ -1,8 +1,8 @@
 import React from "react";
 
-import classes from "./SCROLL.module.css";
+import classes from "./Scroll.module.css";
 
-const SCROLL = () => {
+const Scroll = () => {
   return (
     <div className={classes.mouse_scroll}>
       <div className={classes.mouse}>
@@ -17,4 +17,4 @@ const SCROLL = () => {
   );
 };
 
-export default SCROLL;
+export default Scroll;
