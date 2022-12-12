@@ -16,12 +16,12 @@ const Exercises = ({ exercises, setExercises }) => {
   const paginate = (e, value) => {
     setCurrentPage(value);
 
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 600, behavior: "smooth" });
   };
 
   return (
     <>
-      <div className="flex flex-wrap justify-center row-auto gap-16">
+      <div className="flex flex-wrap justify-center row-auto gap-16 mt-20 ">
         {currentExercises.map((exercise, index) => {
           return <ExerciseCard key={index} exercise={exercise} />;
         })}

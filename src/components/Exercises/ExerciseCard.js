@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const ExerciseCard = ({ exercise }) => {
   return (
     <Link
-      className="border-t-4 border-green-500 shadow-md"
+      className="transition-all duration-300 border-t-4 border-green-500 shadow-md hover:scale-105"
       to={`/exercise/${exercise?.id}`}
     >
       <img src={exercise?.gifUrl} alt={exercise?.name} loading="lazy" />

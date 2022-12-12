@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Exercises from "../components/Exercises/Exercises";
 import { exerciseOptions, fetchData } from "../utils/fetchData";
 import AuthContext from "../store/auth-context";
+import InitialExerciseCards from "../components/Exercises/InitialExerciseCards";
 
 const Workouts = () => {
   const [searchExercises, setSearchExercises] = useState("");
@@ -63,21 +64,35 @@ const Workouts = () => {
           </div>
         </div>
       </header>
-      <form className="flex justify-center mt-10 mb-10">
+      <form className="flex justify-center w-[83%] mx-auto mt-16 mb-10">
         <input
-          className="px-10 py-2 border-2 border-gray-100 rounded-md placeholder:text-left"
+          className="w-[90%] px-10 py-2 border-2 border-gray-100 rounded-md placeholder:text-left"
           onChange={(e) => setSearchExercises(e.target.value.toLowerCase())}
           value={searchExercises}
           placeholder="Search Exercise"
         ></input>
         <button
-          className="px-6 ml-5 text-white transition-all duration-300 bg-green-500 rounded-md hover:bg-green-600"
+          className="w-[10%] py-2 text-white transition-all duration-300 bg-green-500 rounded-md hover:bg-green-600"
           onClick={searchHandler}
         >
-          Search
+          <svg
+            className="inline w-6 h-6 "
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+            />
+          </svg>
         </button>
       </form>
-      {isLoading && <p className="my-10 text-center">Loading...</p>}
+      <InitialExerciseCards />
+      {isLoading && <p className="mt-20 mb-10 text-center">Loading...</p>}
       {!isLoading && (
         <Exercises setExercises={setExercises} exercises={exercises} />
       )}
