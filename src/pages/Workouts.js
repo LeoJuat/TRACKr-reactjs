@@ -44,6 +44,26 @@ const Workouts = () => {
     }
   };
 
+  const selectedBodyPartHandler = async (selected) => {
+    setIsLoading(true);
+    const exerciseData = await fetchData(
+      "https://exercisedb.p.rapidapi.com/exercises",
+      exerciseOptions
+    );
+
+    const filterSearchedExercises = exerciseData.filter((exercise) => {
+      return (
+        exercise.name.toLowerCase().includes(selected) ||
+        exercise.target.toLowerCase().includes(selected) ||
+        exercise.bodyPart.toLowerCase().includes(selected) ||
+        exercise.equipment.toLowerCase().includes(selected)
+      );
+    });
+
+    setIsLoading(false);
+    setExercises(filterSearchedExercises);
+  };
+
   return (
     <div>
       <header>
@@ -64,7 +84,34 @@ const Workouts = () => {
           </div>
         </div>
       </header>
-      <form className="flex justify-center w-[83%] mx-auto mt-16 mb-10">
+      <div className="w-[80%] h-3/4 mx-auto grid grid-cols-2 justify-items-center">
+        <div className="flex flex-col justify-center">
+          <h1 className="self-center w-3/4 text-5xl font-bold">
+            Choose workouts to add into your workout tracker!
+          </h1>
+          <button
+            onClick={() => {
+              window.scrollTo({ top: 800, behavior: "smooth" });
+            }}
+            className="p-4 mt-5 ml-20 font-semibold text-white transition-all duration-300 bg-green-500 rounded-md w-fit hover:bg-green-600"
+          >
+            Workouts
+          </button>
+        </div>
+        <div>
+          <img
+            className="translate-y-10 h-80"
+            src={require("../imgs/deadlift.webp")}
+            alt="deadlift"
+          />
+          <img
+            className="z-10 translate-x-20 h-80"
+            src={require("../imgs/squat.webp")}
+            alt="squat"
+          />
+        </div>
+      </div>
+      <form className="flex justify-center w-[83%] mx-auto mt-28 mb-10">
         <input
           className="w-[90%] px-10 py-2 border-2 border-gray-100 rounded-md placeholder:text-left"
           onChange={(e) => setSearchExercises(e.target.value.toLowerCase())}
@@ -91,7 +138,7 @@ const Workouts = () => {
           </svg>
         </button>
       </form>
-      <InitialExerciseCards />
+      <InitialExerciseCards selectedBodyPart={selectedBodyPartHandler} />
       {isLoading && <p className="mt-20 mb-10 text-center">Loading...</p>}
       {!isLoading && (
         <Exercises setExercises={setExercises} exercises={exercises} />

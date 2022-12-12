@@ -16,7 +16,7 @@ const Exercises = ({ exercises, setExercises }) => {
   const paginate = (e, value) => {
     setCurrentPage(value);
 
-    window.scrollTo({ top: 600, behavior: "smooth" });
+    window.scrollTo({ top: 800, behavior: "smooth" });
   };
 
   return (

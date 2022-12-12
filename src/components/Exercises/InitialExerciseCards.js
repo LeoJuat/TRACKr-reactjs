@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { exerciseOptions, fetchData } from "../../utils/fetchData";
 
-const InitialExerciseCards = () => {
+const InitialExerciseCards = ({ selectedBodyPart }) => {
   const [bodyParts, setBodyParts] = useState(null);
 
   useEffect(() => {
@@ -23,6 +23,9 @@ const InitialExerciseCards = () => {
         {bodyParts?.map((bodyPart) => {
           return (
             <div
+              onClick={() => {
+                return selectedBodyPart(bodyPart);
+              }}
               className="mx-6 transition-all duration-300 border-2 shadow-md cursor-pointer p-28 border-y-green-500 hover:scale-95"
               key={bodyPart}
             >
