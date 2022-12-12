@@ -19,14 +19,14 @@ const InitialExerciseCards = ({ selectedBodyPart }) => {
 
   return (
     <>
-      <div className="mt-20 w-[80%] mx-auto flex overflow-auto scrollbar-hide h-72">
+      <div className="mt-20 w-[80%] mx-auto flex overflow-auto scrollbar-hide h-72 border-t-4 border-t-green-500">
         {bodyParts?.map((bodyPart) => {
           return (
             <div
               onClick={() => {
                 return selectedBodyPart(bodyPart);
               }}
-              className="mx-6 transition-all duration-300 border-2 shadow-md cursor-pointer p-28 border-y-green-500 hover:scale-95"
+              className="mx-6 transition-all duration-300 scale-95 border-2 shadow-md cursor-pointer p-28 hover:scale-90"
               key={bodyPart}
             >
               <svg
