@@ -23,7 +23,8 @@ const InitialExerciseCards = ({ selectedBodyPart }) => {
         {bodyParts?.map((bodyPart) => {
           return (
             <div
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault();
                 return selectedBodyPart(bodyPart);
               }}
               className="mx-6 transition-all duration-300 scale-95 border-2 shadow-md cursor-pointer p-28 hover:scale-90"

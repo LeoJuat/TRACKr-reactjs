@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ExerciseCard from "./ExerciseCard";
 import { Pagination } from "@mui/material";
 
-const Exercises = ({ exercises, setExercises }) => {
+const Exercises = ({ exercises, setSelected, counter }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const exercisesPerPage = 9;
 
@@ -23,7 +23,14 @@ const Exercises = ({ exercises, setExercises }) => {
     <>
       <div className="flex flex-wrap justify-center row-auto gap-16 mt-20 ">
         {currentExercises.map((exercise, index) => {
-          return <ExerciseCard key={index} exercise={exercise} />;
+          return (
+            <ExerciseCard
+              onSelected={setSelected}
+              cartCount={counter}
+              key={index}
+              exercise={exercise}
+            />
+          );
         })}
       </div>
       <div className="flex justify-center mt-24 mb-16">

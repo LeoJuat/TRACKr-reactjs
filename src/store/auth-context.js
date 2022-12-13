@@ -11,6 +11,7 @@ const AuthContext = React.createContext({
 export const AuthContextProvider = (props) => {
   const initialToken = localStorage.getItem("token");
   const [token, setToken] = useState(initialToken);
+  // eslint-disable-next-line no-unused-vars
   const [name, setName] = useState("");
 
   const userIsLoggedIn = !!token;

@@ -4,11 +4,16 @@ import Exercises from "../components/Exercises/Exercises";
 import { exerciseOptions, fetchData } from "../utils/fetchData";
 import AuthContext from "../store/auth-context";
 import InitialExerciseCards from "../components/Exercises/InitialExerciseCards";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 
 const Workouts = () => {
   const [searchExercises, setSearchExercises] = useState("");
   const [exercises, setExercises] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [calendarValue, setCalendarValue] = useState(new Date());
+  const [selectedExercise, setSelectedExercise] = useState(null);
+  const [counter, setCounter] = useState(0);
 
   const navigate = useNavigate();
 
@@ -64,6 +69,18 @@ const Workouts = () => {
     setExercises(filterSearchedExercises);
   };
 
+  const selectedHandler = (arr) => {
+    setSelectedExercise(arr);
+  };
+
+  const cartCountHandler = () => {
+    setCounter(counter + 1);
+  };
+
+  const selectedClickHandler = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <div>
       <header>
@@ -84,30 +101,40 @@ const Workouts = () => {
           </div>
         </div>
       </header>
-      <div className="w-[80%] h-3/4 mx-auto grid grid-cols-2 justify-items-center">
-        <div className="flex flex-col justify-center">
-          <h1 className="self-center w-3/4 text-5xl font-bold">
-            Choose workouts to add into your workout tracker!
-          </h1>
-          <button
-            onClick={() => {
-              window.scrollTo({ top: 800, behavior: "smooth" });
-            }}
-            className="p-4 mt-5 ml-20 font-semibold text-white transition-all duration-300 bg-green-500 rounded-md w-fit hover:bg-green-600"
-          >
-            Workouts
-          </button>
+      <div className="w-[80%] h-auto mx-auto grid grid-cols-2 justify-items-center shadow-2xl rounded-lg">
+        <div className="mb-10 ml-5">
+          <ul>
+            {selectedExercise?.map((name) => {
+              return (
+                <div key={name}>
+                  <li className="mt-10 font-semibold">{name.toUpperCase()}</li>
+                  <form>
+                    <label className="m-5" htmlFor="set">
+                      Set:
+                    </label>
+                    <input
+                      placeholder="Reps"
+                      className="px-1 py-2 border-2 border-gray-300 rounded-md "
+                    ></input>
+                    <input
+                      placeholder="Weight"
+                      className="px-1 py-2 ml-5 border-2 border-gray-300 rounded-md "
+                    ></input>
+                  </form>
+                  <button className="px-3 py-1 ml-5 font-medium text-black transition-all duration-200 translate-y-5 bg-transparent border-2 border-green-500 rounded-3xl hover:bg-green-500 hover:text-white">
+                    Add set
+                  </button>
+                </div>
+              );
+            })}
+          </ul>
         </div>
-        <div>
-          <img
-            className="translate-y-10 h-80"
-            src={require("../imgs/deadlift.webp")}
-            alt="deadlift"
-          />
-          <img
-            className="z-10 translate-x-20 h-80"
-            src={require("../imgs/squat.webp")}
-            alt="squat"
+        <div className="py-10">
+          <Calendar
+            className="rounded-md"
+            calendarType="US"
+            onChange={setCalendarValue}
+            value={calendarValue}
           />
         </div>
       </div>
@@ -141,7 +168,29 @@ const Workouts = () => {
       <InitialExerciseCards selectedBodyPart={selectedBodyPartHandler} />
       {isLoading && <p className="mt-20 mb-10 text-center">Loading...</p>}
       {!isLoading && (
-        <Exercises setExercises={setExercises} exercises={exercises} />
+        <Exercises
+          counter={cartCountHandler}
+          setSelected={selectedHandler}
+          setExercises={setExercises}
+          exercises={exercises}
+        />
+      )}
+      {counter !== 0 && (
+        <button
+          onClick={selectedClickHandler}
+          className="fixed p-2 transition-all duration-200 bg-green-500 rounded-full right-8 bottom-8 hover:bg-green-400 hover:scale-110"
+        >
+          <svg
+            className="w-8 h-8"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 80 80"
+          >
+            <path d="M9 53h6v1c0 2.206 1.794 4 4 4h6c2.206 0 4-1.794 4-4v-8h22v8c0 2.206 1.794 4 4 4h6c2.206 0 4-1.794 4-4v-1h6c2.206 0 4-1.794 4-4V31c0-2.206-1.794-4-4-4h-6v-1c0-2.206-1.794-4-4-4h-6c-2.206 0-4 1.794-4 4v8H29v-8c0-2.206-1.794-4-4-4h-6c-2.206 0-4 1.794-4 4v1H9c-2.206 0-4 1.794-4 4v18c0 2.206 1.794 4 4 4zm62-22v18h-6V31h6zm-16-5h6v28h-6V26zm-4.25 12v4H29v-4h21.75zM19 26h6v20h.002v8H19V26zM9 31h6v18H9V31z" />
+          </svg>
+          <div className="absolute px-2 bg-red-500 rounded-[50%] translate-x-5 bottom-8 text-white">
+            {counter}
+          </div>
+        </button>
       )}
     </div>
   );
