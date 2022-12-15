@@ -6,17 +6,40 @@ import AuthContext from "../store/auth-context";
 import InitialExerciseCards from "../components/Exercises/InitialExerciseCards";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import ExerciseContext from "../store/exercise-context";
+
+const InputForm = () => {
+  return (
+    <form className="mt-2">
+      <label className="m-5 text-white" htmlFor="set">
+        Set:
+      </label>
+      <input
+        type="number"
+        placeholder="Reps"
+        className="px-1 py-2 border-2 border-gray-300 rounded-md "
+      ></input>
+      <input
+        type="number"
+        placeholder="Weight"
+        className="px-1 py-2 ml-5 border-2 border-gray-300 rounded-md "
+      ></input>
+      <span className="ml-2 text-white">lbs</span>
+    </form>
+  );
+};
 
 const Workouts = () => {
   const [searchExercises, setSearchExercises] = useState("");
   const [exercises, setExercises] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [calendarValue, setCalendarValue] = useState(new Date());
-  const [selectedExercise, setSelectedExercise] = useState(null);
-  const [counter, setCounter] = useState(0);
+  const [inputForm, setInputForm] = useState([]);
+  // const [filterExercises, setFilterExercises] = useState([]);
 
   const navigate = useNavigate();
 
+  const exerciseCtx = useContext(ExerciseContext);
   const authCtx = useContext(AuthContext);
 
   const signoutHandler = () => {
@@ -43,6 +66,7 @@ const Workouts = () => {
         );
       });
 
+      window.scrollTo({ top: 800, behavior: "smooth" });
       setIsLoading(false);
       setSearchExercises("");
       setExercises(filterSearchedExercises);
@@ -69,16 +93,12 @@ const Workouts = () => {
     setExercises(filterSearchedExercises);
   };
 
-  const selectedHandler = (arr) => {
-    setSelectedExercise(arr);
-  };
-
-  const cartCountHandler = () => {
-    setCounter(counter + 1);
-  };
-
   const selectedClickHandler = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const addSetHandler = () => {
+    setInputForm(inputForm.concat(<InputForm key={inputForm.length} />));
   };
 
   return (
@@ -101,29 +121,49 @@ const Workouts = () => {
           </div>
         </div>
       </header>
-      <div className="w-[80%] h-auto mx-auto grid grid-cols-2 justify-items-center shadow-2xl rounded-lg">
+      <div className="w-[80%] h-auto gradient mt-10 mx-auto grid grid-cols-2 justify-items-center shadow-2xl rounded-lg">
         <div className="mb-10 ml-5">
           <ul>
-            {selectedExercise?.map((name) => {
+            {exerciseCtx.exercises?.map((name) => {
               return (
                 <div key={name}>
-                  <li className="mt-10 font-semibold">{name.toUpperCase()}</li>
-                  <form>
-                    <label className="m-5" htmlFor="set">
-                      Set:
-                    </label>
-                    <input
-                      placeholder="Reps"
-                      className="px-1 py-2 border-2 border-gray-300 rounded-md "
-                    ></input>
-                    <input
-                      placeholder="Weight"
-                      className="px-1 py-2 ml-5 border-2 border-gray-300 rounded-md "
-                    ></input>
-                  </form>
-                  <button className="px-3 py-1 ml-5 font-medium text-black transition-all duration-200 translate-y-5 bg-transparent border-2 border-green-500 rounded-3xl hover:bg-green-500 hover:text-white">
-                    Add set
-                  </button>
+                  <div>
+                    <li
+                      onClick={exerciseCtx.removeExercise}
+                      className="mt-10 font-semibold text-white cursor-pointer hover:text-red-500 hover:scale-105"
+                    >
+                      {name?.toUpperCase()}
+                    </li>
+                    <form className="mt-2">
+                      <label className="m-5 text-white" htmlFor="set">
+                        Set:
+                      </label>
+                      <input
+                        type="number"
+                        placeholder="Reps"
+                        className="px-1 py-2 border-2 border-gray-300 rounded-md "
+                      ></input>
+                      <input
+                        type="number"
+                        placeholder="Weight"
+                        className="px-1 py-2 ml-5 border-2 border-gray-300 rounded-md "
+                      ></input>
+                      <span className="ml-2 text-white">lbs</span>
+                    </form>
+                    {inputForm}
+                    <button
+                      onClick={addSetHandler}
+                      className="z-10 px-3 py-1 ml-5 font-medium text-white transition-all duration-200 translate-y-5 bg-transparent border-2 border-white rounded-3xl hover:bg-green-500 hover:text-white"
+                    >
+                      Add set
+                    </button>
+                    {/* <button
+                    onClick={removeSetHandler}
+                    className="px-3 py-1 ml-5 font-medium text-white transition-all duration-200 translate-y-5 bg-transparent border-2 border-white rounded-3xl hover:bg-red-500 hover:text-white"
+                    >
+                    Remove set
+                  </button> */}
+                  </div>
                 </div>
               );
             })}
@@ -131,7 +171,7 @@ const Workouts = () => {
         </div>
         <div className="py-10">
           <Calendar
-            className="rounded-md"
+            className="rounded-md "
             calendarType="US"
             onChange={setCalendarValue}
             value={calendarValue}
@@ -167,15 +207,8 @@ const Workouts = () => {
       </form>
       <InitialExerciseCards selectedBodyPart={selectedBodyPartHandler} />
       {isLoading && <p className="mt-20 mb-10 text-center">Loading...</p>}
-      {!isLoading && (
-        <Exercises
-          counter={cartCountHandler}
-          setSelected={selectedHandler}
-          setExercises={setExercises}
-          exercises={exercises}
-        />
-      )}
-      {counter !== 0 && (
+      {!isLoading && <Exercises exercises={exercises} />}
+      {exerciseCtx.counter !== 0 && (
         <button
           onClick={selectedClickHandler}
           className="fixed p-2 transition-all duration-200 bg-green-500 rounded-full right-8 bottom-8 hover:bg-green-400 hover:scale-110"
@@ -188,7 +221,7 @@ const Workouts = () => {
             <path d="M9 53h6v1c0 2.206 1.794 4 4 4h6c2.206 0 4-1.794 4-4v-8h22v8c0 2.206 1.794 4 4 4h6c2.206 0 4-1.794 4-4v-1h6c2.206 0 4-1.794 4-4V31c0-2.206-1.794-4-4-4h-6v-1c0-2.206-1.794-4-4-4h-6c-2.206 0-4 1.794-4 4v8H29v-8c0-2.206-1.794-4-4-4h-6c-2.206 0-4 1.794-4 4v1H9c-2.206 0-4 1.794-4 4v18c0 2.206 1.794 4 4 4zm62-22v18h-6V31h6zm-16-5h6v28h-6V26zm-4.25 12v4H29v-4h21.75zM19 26h6v20h.002v8H19V26zM9 31h6v18H9V31z" />
           </svg>
           <div className="absolute px-2 bg-red-500 rounded-[50%] translate-x-5 bottom-8 text-white">
-            {counter}
+            {exerciseCtx.counter}
           </div>
         </button>
       )}

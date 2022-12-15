@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
+import ExerciseContext from "../../store/exercise-context";
 
-const selectedArray = [];
+const ExerciseCard = ({ exercise }) => {
+  const exerciseCtx = useContext(ExerciseContext);
 
-const ExerciseCard = ({ exercise, onSelected, cartCount }) => {
   const selectedHandler = () => {
-    selectedArray.push(exercise.name);
-    cartCount();
-    onSelected(selectedArray);
+    exerciseCtx.data(exercise.name);
+    exerciseCtx.setCounter(exerciseCtx.counter);
   };
 
   return (

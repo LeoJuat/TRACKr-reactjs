@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ExerciseCard from "./ExerciseCard";
 import { Pagination } from "@mui/material";
 
-const Exercises = ({ exercises, setSelected, counter }) => {
+const Exercises = ({ exercises }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const exercisesPerPage = 9;
 
@@ -13,7 +13,7 @@ const Exercises = ({ exercises, setSelected, counter }) => {
     indexOfLastExercise
   );
 
-  const paginate = (e, value) => {
+  const paginate = (value) => {
     setCurrentPage(value);
 
     window.scrollTo({ top: 800, behavior: "smooth" });
@@ -23,14 +23,7 @@ const Exercises = ({ exercises, setSelected, counter }) => {
     <>
       <div className="flex flex-wrap justify-center row-auto gap-16 mt-20 ">
         {currentExercises.map((exercise, index) => {
-          return (
-            <ExerciseCard
-              onSelected={setSelected}
-              cartCount={counter}
-              key={index}
-              exercise={exercise}
-            />
-          );
+          return <ExerciseCard key={index} exercise={exercise} />;
         })}
       </div>
       <div className="flex justify-center mt-24 mb-16">

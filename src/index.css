@@ -44,6 +44,14 @@
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.76);
 }
 
+.gradient {
+  background: linear-gradient(
+    185deg,
+    rgba(0, 0, 0, 0.75),
+    rgba(14, 118, 25, 0.628)
+  );
+}
+
 /* For Webkit-based browsers (Chrome, Safari and Opera) */
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
