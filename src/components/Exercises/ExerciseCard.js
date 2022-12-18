@@ -1,18 +1,10 @@
-import React, { useContext } from "react";
-import ExerciseContext from "../../store/exercise-context";
+import React from "react";
 
-const ExerciseCard = ({ exercise }) => {
-  const exerciseCtx = useContext(ExerciseContext);
-
-  const selectedHandler = () => {
-    exerciseCtx.data(exercise.name);
-    exerciseCtx.setCounter(exerciseCtx.counter);
-  };
-
+const ExerciseCard = ({ exercise, setSelectedExercises }) => {
   return (
     <>
       <div
-        onClick={selectedHandler}
+        onClick={(e) => setSelectedExercises(exercise.name)}
         className="transition-all duration-300 border-t-4 border-green-500 shadow-md cursor-pointer hover:scale-105"
         to={`/exercise/${exercise?.id}`}
       >

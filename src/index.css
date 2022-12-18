@@ -47,8 +47,8 @@
 .gradient {
   background: linear-gradient(
     185deg,
-    rgba(0, 0, 0, 0.75),
-    rgba(14, 118, 25, 0.628)
+    rgba(14, 118, 25, 0.628),
+    rgba(14, 118, 25, 0.828)
   );
 }
 

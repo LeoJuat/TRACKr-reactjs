@@ -19,7 +19,7 @@ const InitialExerciseCards = ({ selectedBodyPart }) => {
 
   return (
     <>
-      <div className="mt-20 w-[80%] mx-auto flex overflow-auto scrollbar-hide h-72 border-t-4 border-t-green-500">
+      <div className="mt-20 w-[80%] mx-auto flex overflow-auto scrollbar-hide h-72">
         {bodyParts?.map((bodyPart) => {
           return (
             <div
