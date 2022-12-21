@@ -6,13 +6,15 @@ import AuthContext from "../store/auth-context";
 import InitialExerciseCards from "../components/Exercises/InitialExerciseCards";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import ExerciseInputs from "../components/ExerciseInputs";
+import ExerciseInputs from "../components/Exercises/ExerciseInputs";
+import { Alert, Snackbar } from "@mui/material";
 
 const Workouts = () => {
   const [searchExercises, setSearchExercises] = useState("");
   const [exercises, setExercises] = useState([]);
   const [selectedExercises, setSelectedExercises] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [snackbar, setSnackbar] = useState(false);
   const [calendarValue, setCalendarValue] = useState(new Date());
 
   const navigate = useNavigate();
@@ -75,7 +77,10 @@ const Workouts = () => {
   };
 
   function handleSelectedExercise(newExercise) {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
     setSelectedExercises([...selectedExercises, newExercise]);
+    console.log(selectedExercises);
   }
 
   const saveHandler = async (exercise, sets) => {
@@ -106,7 +111,38 @@ const Workouts = () => {
 
     const data = await res.json();
 
+    setSnackbar(true);
+    setSelectedExercises([]);
     return data;
+  };
+
+  const closeHandler = (reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setSnackbar(false);
+  };
+
+  const calendarHandler = async (e) => {
+    // console.log(e.getUTCMonth() + 1, e.getDate());
+
+    const res = await fetch(
+      "https://trackr-production-default-rtdb.firebaseio.com/workoutData.json",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const data = await res.json();
+    console.log(
+      Object.values(data).filter((date) =>
+        console.log(date.date.includes(e.getUTCMonth() + 1 && e.getDate()))
+      )
+    );
   };
 
   return (
@@ -132,6 +168,7 @@ const Workouts = () => {
       <div className="w-[80%] h-auto gradient mt-10 mx-auto grid grid-cols-2 justify-items-center shadow-2xl rounded-lg">
         <div className="flex flex-col self-center mb-10 ml-5">
           <ExerciseInputs
+            setSelectedExercises={setSelectedExercises}
             selectedExercises={selectedExercises}
             saveHandler={saveHandler}
           />
@@ -142,9 +179,25 @@ const Workouts = () => {
             calendarType="US"
             onChange={setCalendarValue}
             value={calendarValue}
+            onClickDay={calendarHandler}
           />
         </div>
       </div>
+      {snackbar && (
+        <Snackbar
+          open={snackbar}
+          autoHideDuration={6000}
+          onClose={closeHandler}
+        >
+          <Alert
+            onClose={closeHandler}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            Workout saved!
+          </Alert>
+        </Snackbar>
+      )}
       <form className="flex justify-center w-[83%] mx-auto mt-28 mb-10">
         <input
           className="w-[90%] px-10 py-2 border-2 border-gray-100 rounded-md placeholder:text-left"

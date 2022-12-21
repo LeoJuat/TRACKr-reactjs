@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { Tooltip } from "@mui/material";
 
-const ExerciseInputs = ({ selectedExercises, saveHandler }) => {
+const ExerciseInputs = ({
+  setSelectedExercises,
+  selectedExercises,
+  saveHandler,
+}) => {
   // Set represents both weight and reps
   const INITIAL_SET = {
     weight: 0,
@@ -33,6 +37,10 @@ const ExerciseInputs = ({ selectedExercises, saveHandler }) => {
     setSets(newSets);
   }
 
+  const removeWorkoutHandler = () => {
+    setSelectedExercises([]);
+  };
+
   if (!selectedExercises.length) {
     return (
       <h1 className="mx-10 text-3xl font-semibold text-white">
@@ -43,28 +51,36 @@ const ExerciseInputs = ({ selectedExercises, saveHandler }) => {
 
   return selectedExercises?.map((exercise, index) => {
     return (
-      <span key={index}>
-        <ExerciseInput
-          exercise={exercise}
-          addSetHandler={addSetHandler}
-          handleRemoveSet={handleRemoveSet}
-          handleSetChange={handleSetChange}
-          sets={sets}
-          index={index}
-        />
-        <button
-          onClick={() => saveHandler(exercise, sets)}
-          className="z-10 px-3 py-1 mt-10 font-medium text-white transition-all duration-200 bg-green-500 border-2 border-white rounded-3xl hover:bg-green-600 hover:text-white"
-        >
-          Save progress
-        </button>
-      </span>
+      <React.Fragment key={index}>
+        <h1 className="mt-10 text-lg font-semibold text-white">
+          Input your reps/weight and save progress before choosing another
+          exercise or Click on the name if you want to delete the exercise.
+        </h1>
+        <span key={index}>
+          <ExerciseInput
+            removeWorkoutHandler={removeWorkoutHandler}
+            exercise={exercise}
+            addSetHandler={addSetHandler}
+            handleRemoveSet={handleRemoveSet}
+            handleSetChange={handleSetChange}
+            sets={sets}
+            index={index}
+          />
+          <button
+            onClick={() => saveHandler(exercise, sets)}
+            className="z-10 w-full px-3 py-1 mt-10 font-medium text-white transition-all duration-200 bg-blue-500 border-2 border-white w-6/6 rounded-3xl hover:bg-blue-600 hover:text-white"
+          >
+            Save progress
+          </button>
+        </span>
+      </React.Fragment>
     );
   });
 };
 
 const ExerciseInput = ({
-  /*handleRemoveSet*/
+  removeWorkoutHandler,
+  handleRemoveSet,
   exercise,
   addSetHandler,
   handleSetChange,
@@ -75,8 +91,8 @@ const ExerciseInput = ({
     <div>
       <Tooltip title="Click to delete workout" placement="left">
         <li
-          // onClick={removeExercise}
-          className="mt-10 font-semibold text-white transition-all duration-200 cursor-pointer w-fit hover:text-red-500 hover:scale-105"
+          onClick={removeWorkoutHandler}
+          className="mt-10 font-semibold text-white underline list-disc transition-all duration-200 cursor-pointer w-fit hover:text-red-500 hover:scale-105"
         >
           {exercise.toUpperCase()}
         </li>
@@ -109,9 +125,15 @@ const ExerciseInput = ({
 
       <button
         onClick={addSetHandler}
-        className="z-10 px-3 py-1 ml-5 font-medium text-white transition-all duration-200 translate-y-5 bg-transparent border-2 border-white rounded-3xl hover:bg-green-500 hover:text-white"
+        className="z-10 px-3 py-1 ml-5 font-medium text-white transition-all duration-200 translate-y-5 bg-green-500 border-2 border-white rounded-3xl hover:bg-green-600 hover:text-white"
       >
         Add set
+      </button>
+      <button
+        onClick={handleRemoveSet}
+        className="z-10 px-3 py-1 ml-5 font-medium text-white transition-all duration-200 translate-y-5 bg-red-500 border-2 border-white rounded-3xl hover:bg-red-600 hover:text-white"
+      >
+        Remove set
       </button>
     </div>
   );
