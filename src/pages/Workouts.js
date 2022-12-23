@@ -16,6 +16,7 @@ const Workouts = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [snackbar, setSnackbar] = useState(false);
   const [calendarValue, setCalendarValue] = useState(new Date());
+  const [filteredDates, setFilteredDates] = useState(null);
 
   const navigate = useNavigate();
 
@@ -96,8 +97,6 @@ const Workouts = () => {
       date: pst,
     };
 
-    console.log(workoutData);
-
     const res = await fetch(
       "https://trackr-production-default-rtdb.firebaseio.com/workoutData.json",
       {
@@ -125,8 +124,6 @@ const Workouts = () => {
   };
 
   const calendarHandler = async (e) => {
-    // console.log(e.getUTCMonth() + 1, e.getDate());
-
     const res = await fetch(
       "https://trackr-production-default-rtdb.firebaseio.com/workoutData.json",
       {
@@ -138,11 +135,14 @@ const Workouts = () => {
     );
 
     const data = await res.json();
-    console.log(
-      Object.values(data).filter((date) =>
-        console.log(date.date.includes(e.getUTCMonth() + 1 && e.getDate()))
+
+    const filteredDatesArr = Object.values(data).filter((date) =>
+      date.date.includes(
+        e.getMonth() + 1 + "/" + e.getDate() + "/" + e.getFullYear()
       )
     );
+
+    setFilteredDates(filteredDatesArr);
   };
 
   return (
@@ -167,13 +167,40 @@ const Workouts = () => {
       </header>
       <div className="w-[80%] h-auto gradient mt-10 mx-auto grid grid-cols-2 justify-items-center shadow-2xl rounded-lg">
         <div className="flex flex-col self-center mb-10 ml-5">
+          {filteredDates &&
+            filteredDates.map((workout) => {
+              let str = "";
+
+              for (let i = 0; i < workout.sets.length; i++) {
+                str += `SET ${i + 1} - Reps: ${workout.sets[i].reps} Weight: ${
+                  workout.sets[i].weight
+                } | `;
+              }
+
+              return (
+                <li
+                  key={workout.date}
+                  className="px-16 pt-10 font-semibold leading-8 text-white"
+                >
+                  {workout.name.toUpperCase()}: <br /> {str}
+                </li>
+              );
+            })}
           <ExerciseInputs
             setSelectedExercises={setSelectedExercises}
             selectedExercises={selectedExercises}
             saveHandler={saveHandler}
           />
+          {!filteredDates?.length && (
+            <h1 className="mx-10 text-3xl font-semibold text-white">
+              Please choose a workout down below to start tracking! 💪
+            </h1>
+          )}
         </div>
         <div className="py-10">
+          <h1 className="pt-3 pb-3 text-xl font-semibold text-white">
+            Click on a date to see past progress!
+          </h1>
           <Calendar
             className="rounded-md "
             calendarType="US"
