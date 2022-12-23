@@ -5,7 +5,7 @@ import InitialExerciseCards from "../components/Exercises/InitialExerciseCards";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import ExerciseInputs from "../components/Exercises/ExerciseInputs";
-import { Alert, Snackbar } from "@mui/material";
+import { Alert, Snackbar, Tooltip } from "@mui/material";
 import SearchExercise from "../components/Exercises/SearchExercise";
 import LoggedInHeader from "../components/Header/LoggedInHeader";
 import SelectedDateExercises from "../components/Exercises/SelectedDateExercises";
@@ -114,6 +114,7 @@ const Workouts = () => {
   };
 
   const calendarHandler = async (e) => {
+    setIsLoading(true);
     const res = await fetch(
       "https://trackr-production-default-rtdb.firebaseio.com/workoutData.json",
       {
@@ -133,14 +134,18 @@ const Workouts = () => {
     );
 
     setFilteredDates(filteredDatesArr);
+    setIsLoading(false);
   };
 
   return (
     <div>
       <LoggedInHeader />
-      <div className="w-[80%] h-auto gradient mt-10 mx-auto grid grid-cols-2 justify-items-center shadow-2xl rounded-lg">
+      <div className="w-[83%] h-auto gradient mt-10 mx-auto grid grid-cols-2 justify-items-center shadow-2xl rounded-lg">
         <div className="flex flex-col self-center mb-10 ml-5">
-          {filteredDates && (
+          {isLoading && (
+            <p className="mt-20 text-center text-white mb-36">Loading...</p>
+          )}
+          {filteredDates && !isLoading && (
             <SelectedDateExercises filteredDates={filteredDates} />
           )}
           <ExerciseInputs
@@ -154,18 +159,20 @@ const Workouts = () => {
             </h1>
           )}
         </div>
-        <div className="py-10">
-          <h1 className="pt-3 pb-3 text-xl font-semibold text-white">
-            Click on a date to see past progress!
-          </h1>
-          <Calendar
-            className="rounded-md "
-            calendarType="US"
-            onChange={setCalendarValue}
-            value={calendarValue}
-            onClickDay={calendarHandler}
-          />
-        </div>
+        <Tooltip
+          title="Click on a date to see past progress!"
+          placement="right"
+        >
+          <div className="py-10">
+            <Calendar
+              className="rounded-md "
+              calendarType="US"
+              onChange={setCalendarValue}
+              value={calendarValue}
+              onClickDay={calendarHandler}
+            />
+          </div>
+        </Tooltip>
       </div>
       {snackbar && (
         <Snackbar
