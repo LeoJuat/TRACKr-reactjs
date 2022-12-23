@@ -41,14 +41,6 @@ const ExerciseInputs = ({
     setSelectedExercises([]);
   };
 
-  // if (!selectedExercises.length) {
-  //   return (
-  //     <h1 className="mx-10 text-3xl font-semibold text-white">
-  //       Please choose a workout down below to start tracking! 💪
-  //     </h1>
-  //   );
-  // }
-
   return selectedExercises?.map((exercise, index) => {
     return (
       <React.Fragment key={index}>
