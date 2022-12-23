@@ -35,10 +35,7 @@ const BetterSignUp = () => {
       }
     );
 
-    setIsLoading(false);
-
     if (res.ok) {
-      console.log(res);
     } else {
       const data = await res.json();
       let errorMessage = "Auhentication failed";
@@ -48,7 +45,38 @@ const BetterSignUp = () => {
       alert(errorMessage);
     }
 
-    navigate("/login");
+    fetch(
+      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDLIO2uNqMm1p9cLp07akv3EmjMlh8Oxzg",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: enteredEmail,
+          password: enteredPassword,
+          returnSecureToken: true,
+        }),
+      }
+    )
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          let errorMessage = "Incorrect email or password";
+          throw new Error(errorMessage);
+        }
+      })
+      .then((data) => {
+        authCtx.login(data.idToken);
+        authCtx.displayName(data.displayName);
+        authCtx.uidHandler(data.localId);
+
+        navigate("/home");
+      })
+      .catch((err) => {
+        alert(err.message);
+
+        setIsLoading(false);
+      });
   };
 
   const demoSigninHandler = (e) => {
@@ -79,6 +107,7 @@ const BetterSignUp = () => {
       .then((data) => {
         authCtx.login(data.idToken);
         authCtx.displayName(data.displayName);
+        authCtx.uidHandler(data.localId);
 
         navigate("/home");
       })
@@ -174,7 +203,7 @@ const BetterSignUp = () => {
               {!isLoading && (
                 <button
                   onClick={demoSigninHandler}
-                  className="text-white bg-[#3cd157] border-0 my-1 py-2 px-8 focus:outline-none hover:bg-[#35bd4e] rounded font-medium text-lg transition-all duration-300 ease-in-out"
+                  className="text-[#3cd157] border-[#3cd157] border-2 my-1 py-2 px-8 focus:outline-none hover:bg-[#35bd4e] hover:text-white rounded font-medium text-lg transition-all duration-300 ease-in-out"
                 >
                   Demo sign in
                 </button>

@@ -40,6 +40,7 @@ const Login = () => {
       .then((data) => {
         authCtx.login(data.idToken);
         authCtx.displayName(data.displayName);
+        authCtx.uidHandler(data.localId);
 
         navigate("/home");
       })
@@ -78,6 +79,7 @@ const Login = () => {
       .then((data) => {
         authCtx.login(data.idToken);
         authCtx.displayName(data.displayName);
+        authCtx.uidHandler(data.localId);
 
         navigate("/home");
       })
@@ -147,7 +149,7 @@ const Login = () => {
                 />
               </div>
               {!loading && (
-                <button className="ml-[35.3rem] text-white bg-[#3cd157] border-0 py-2 px-8 focus:outline-none hover:bg-[#35bd4e] rounded font-medium text-lg transition-all duration-300 ease-in-out">
+                <button className="w-44 text-white bg-[#3cd157] border-0 py-2 px-8 focus:outline-none hover:bg-[#35bd4e] rounded font-medium text-lg transition-all duration-300 ease-in-out">
                   Login
                 </button>
               )}
@@ -155,7 +157,7 @@ const Login = () => {
               {!loading && (
                 <button
                   onClick={demoSigninHandler}
-                  className="ml-[35.3rem] translate-y-3 text-white bg-[#3cd157] border-0 py-2 px-8 focus:outline-none hover:bg-[#35bd4e] font-medium rounded text-lg transition-all duration-300 ease-in-out"
+                  className="w-44 translate-y-3 text-[#3cd157] border-[#3cd157] border-2 py-2 px-8 focus:outline-none hover:bg-[#35bd4e] hover:text-white font-medium rounded text-lg transition-all duration-300 ease-in-out"
                 >
                   Demo login
                 </button>

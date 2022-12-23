@@ -82,6 +82,7 @@ const Workouts = () => {
     });
 
     const workoutData = {
+      uid: localStorage.getItem("uid"),
       name: exercise,
       sets: sets,
       date: pst,
@@ -127,11 +128,13 @@ const Workouts = () => {
 
     const data = await res.json();
 
-    const filteredDatesArr = Object.values(data).filter((date) =>
-      date.date.includes(
-        e.getMonth() + 1 + "/" + e.getDate() + "/" + e.getFullYear()
-      )
-    );
+    const filteredDatesArr = Object.values(data).filter((date) => {
+      return (
+        date.date.includes(
+          e.getMonth() + 1 + "/" + e.getDate() + "/" + e.getFullYear()
+        ) && date.uid === localStorage.getItem("uid")
+      );
+    });
 
     setFilteredDates(filteredDatesArr);
     setIsLoading(false);
@@ -153,11 +156,13 @@ const Workouts = () => {
             selectedExercises={selectedExercises}
             saveHandler={saveHandler}
           />
-          {!filteredDates?.length && (
-            <h1 className="mx-10 text-3xl font-semibold text-white">
-              Please choose a workout down below to start tracking! 💪
-            </h1>
-          )}
+          {!filteredDates?.length &&
+            !isLoading &&
+            !selectedExercises?.length && (
+              <h1 className="mx-10 text-3xl font-semibold text-white">
+                Please choose a workout down below to start tracking! 💪
+              </h1>
+            )}
         </div>
         <Tooltip
           title="Click on a date to see past progress!"
