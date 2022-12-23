@@ -1,10 +1,13 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import AuthContext from "../store/auth-context";
 
 const BetterSignUp = () => {
   const navigate = useNavigate();
   const emailRef = useRef();
   const passwordRef = useRef();
+
+  const authCtx = useContext(AuthContext);
 
   const [name, setName] = useState("");
 
@@ -46,6 +49,44 @@ const BetterSignUp = () => {
     }
 
     navigate("/login");
+  };
+
+  const demoSigninHandler = (e) => {
+    e.preventDefault();
+
+    setIsLoading(true);
+
+    fetch(
+      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDLIO2uNqMm1p9cLp07akv3EmjMlh8Oxzg",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: "test@test.com",
+          password: 1234567,
+          returnSecureToken: true,
+        }),
+      }
+    )
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          let errorMessage = "Incorrect email or password";
+          throw new Error(errorMessage);
+        }
+      })
+      .then((data) => {
+        authCtx.login(data.idToken);
+        authCtx.displayName(data.displayName);
+
+        navigate("/home");
+      })
+      .catch((err) => {
+        alert(err.message);
+
+        setIsLoading(false);
+      });
   };
 
   return (
@@ -126,8 +167,16 @@ const BetterSignUp = () => {
                 />
               </div>
               {!isLoading && (
-                <button className="text-white bg-[#3cd157] border-0 my-1 py-2 px-8 focus:outline-none hover:bg-[#35bd4e] rounded text-lg transition-all duration-300 ease-in-out">
+                <button className="text-white bg-[#3cd157] border-0 my-1 py-2 px-8 focus:outline-none hover:bg-[#35bd4e] rounded text-lg font-medium transition-all duration-300 ease-in-out">
                   Sign up
+                </button>
+              )}
+              {!isLoading && (
+                <button
+                  onClick={demoSigninHandler}
+                  className="text-white bg-[#3cd157] border-0 my-1 py-2 px-8 focus:outline-none hover:bg-[#35bd4e] rounded font-medium text-lg transition-all duration-300 ease-in-out"
+                >
+                  Demo sign in
                 </button>
               )}
               {isLoading && <p className="text-center">Sending request...</p>}

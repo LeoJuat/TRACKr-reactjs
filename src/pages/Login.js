@@ -50,6 +50,44 @@ const Login = () => {
       });
   };
 
+  const demoSigninHandler = (e) => {
+    e.preventDefault();
+
+    setLoading(true);
+
+    fetch(
+      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDLIO2uNqMm1p9cLp07akv3EmjMlh8Oxzg",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: "test@test.com",
+          password: 1234567,
+          returnSecureToken: true,
+        }),
+      }
+    )
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          let errorMessage = "Incorrect email or password";
+          throw new Error(errorMessage);
+        }
+      })
+      .then((data) => {
+        authCtx.login(data.idToken);
+        authCtx.displayName(data.displayName);
+
+        navigate("/home");
+      })
+      .catch((err) => {
+        alert(err.message);
+
+        setLoading(false);
+      });
+  };
+
   return (
     <React.Fragment>
       <div className="h-screen bg-gray-300">
@@ -109,10 +147,20 @@ const Login = () => {
                 />
               </div>
               {!loading && (
-                <button className="ml-[35.3rem] text-white bg-[#3cd157] border-0 py-2 px-8 focus:outline-none hover:bg-[#35bd4e] rounded text-lg transition-all duration-300 ease-in-out">
+                <button className="ml-[35.3rem] text-white bg-[#3cd157] border-0 py-2 px-8 focus:outline-none hover:bg-[#35bd4e] rounded font-medium text-lg transition-all duration-300 ease-in-out">
                   Login
                 </button>
               )}
+
+              {!loading && (
+                <button
+                  onClick={demoSigninHandler}
+                  className="ml-[35.3rem] translate-y-3 text-white bg-[#3cd157] border-0 py-2 px-8 focus:outline-none hover:bg-[#35bd4e] font-medium rounded text-lg transition-all duration-300 ease-in-out"
+                >
+                  Demo login
+                </button>
+              )}
+
               {loading && <p className="text-center">Sending request...</p>}
               <br />
               <p className="mt-1 text-xs text-center text-gray-500">
