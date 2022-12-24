@@ -11,7 +11,7 @@ const SearchExercise = ({
         className="w-[90%] px-10 py-2 border-2 border-gray-100 rounded-md placeholder:text-left"
         onChange={(e) => setSearchExercises(e.target.value.toLowerCase())}
         value={searchExercises}
-        placeholder="Search Exercise"
+        placeholder="Search for general exercise. Example: bench (for bench press)"
       ></input>
       <button
         className="w-[10%] py-2 text-white transition-all duration-300 bg-green-600 opacity-90 rounded-md hover:bg-green-500"
