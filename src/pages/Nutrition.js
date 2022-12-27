@@ -33,6 +33,8 @@ const Nutrition = () => {
   const [inputCarbs, setInputCarbs] = useState(null);
   const [snackbar, setSnackbar] = useState(false);
 
+  const UIDKEY = localStorage.getItem("uid");
+
   const closeHandler = (reason) => {
     if (reason === "clickaway") {
       return;
@@ -131,7 +133,6 @@ const Nutrition = () => {
     });
 
     const nutritionData = {
-      uid: localStorage.getItem("uid"),
       calories: inputCalories,
       protein: inputProtein,
       fat: inputFat,
@@ -140,7 +141,7 @@ const Nutrition = () => {
     };
 
     const res = await fetch(
-      "https://trackr-production-default-rtdb.firebaseio.com/nutritionData.json",
+      `https://trackr-production-default-rtdb.firebaseio.com/nutritionData/${UIDKEY}.json`,
       {
         method: "POST",
         body: JSON.stringify(nutritionData),
@@ -161,6 +162,7 @@ const Nutrition = () => {
     <>
       <LoggedInHeader />
       <CalorieCalculatorInputForm
+        UIDKEY={UIDKEY}
         calorieCalculatorHandler={calorieCalculatorHandler}
         saveNutritionHandler={saveNutritionHandler}
         setAge={setAgeHandler}

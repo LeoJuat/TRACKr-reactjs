@@ -19,6 +19,8 @@ const Workouts = () => {
   const [calendarValue, setCalendarValue] = useState(new Date());
   const [filteredDates, setFilteredDates] = useState(null);
 
+  const UIDKEY = localStorage.getItem("uid");
+
   const searchHandler = async (e) => {
     e.preventDefault();
 
@@ -82,14 +84,13 @@ const Workouts = () => {
     });
 
     const workoutData = {
-      uid: localStorage.getItem("uid"),
       name: exercise,
       sets: sets,
       date: pst,
     };
 
     const res = await fetch(
-      "https://trackr-production-default-rtdb.firebaseio.com/workoutData.json",
+      `https://trackr-production-default-rtdb.firebaseio.com/workoutData/${UIDKEY}.json`,
       {
         method: "POST",
         body: JSON.stringify(workoutData),
@@ -117,7 +118,7 @@ const Workouts = () => {
   const calendarHandler = async (e) => {
     setIsLoading(true);
     const res = await fetch(
-      "https://trackr-production-default-rtdb.firebaseio.com/workoutData.json",
+      `https://trackr-production-default-rtdb.firebaseio.com/workoutData/${UIDKEY}.json`,
       {
         method: "GET",
         headers: {
@@ -128,11 +129,16 @@ const Workouts = () => {
 
     const data = await res.json();
 
+    if (data === null) {
+      console.log("This is null");
+      setFilteredDates([]);
+      setIsLoading(false);
+      return;
+    }
+
     const filteredDatesArr = Object.values(data).filter((date) => {
-      return (
-        date.date.includes(
-          e.getMonth() + 1 + "/" + e.getDate() + "/" + e.getFullYear()
-        ) && date.uid === localStorage.getItem("uid")
+      return date.date.includes(
+        e.getMonth() + 1 + "/" + e.getDate() + "/" + e.getFullYear()
       );
     });
 

@@ -6,6 +6,7 @@ import NutritionPlan from "./NutritionPlan";
 import SelectedDatesNutrition from "./SelectedDatesNutrition";
 
 const CalorieCalculatorInputForm = ({
+  UIDKEY,
   calorieCalculatorHandler,
   setAge,
   setGender,
@@ -44,7 +45,7 @@ const CalorieCalculatorInputForm = ({
 
   const calendarHandler = async (e) => {
     const res = await fetch(
-      "https://trackr-production-default-rtdb.firebaseio.com/nutritionData.json",
+      `https://trackr-production-default-rtdb.firebaseio.com/nutritionData/${UIDKEY}.json`,
       {
         method: "GET",
         headers: {
@@ -56,10 +57,8 @@ const CalorieCalculatorInputForm = ({
     const data = await res.json();
 
     const filteredDatesArr = Object.values(data).filter((date) => {
-      return (
-        date.date.includes(
-          e.getMonth() + 1 + "/" + e.getDate() + "/" + e.getFullYear()
-        ) && date.uid === localStorage.getItem("uid")
+      return date.date.includes(
+        e.getMonth() + 1 + "/" + e.getDate() + "/" + e.getFullYear()
       );
     });
 
