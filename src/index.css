@@ -52,6 +52,14 @@
   );
 }
 
+.gradientBlue {
+  background: linear-gradient(
+    185deg,
+    rgba(23, 121, 132, 0.628),
+    rgba(14, 114, 134, 0.828)
+  );
+}
+
 /* For Webkit-based browsers (Chrome, Safari and Opera) */
 .scrollbar-hide::-webkit-scrollbar {
   display: none;

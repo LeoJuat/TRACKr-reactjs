@@ -7,17 +7,18 @@ const ContentScroll2 = () => {
     <div className={classes.grid}>
       <div className={classes.scroll1}>
         <p className={classes.numHeader1}>04</p>
-        <h1 className={classes.first}>Track your workouts</h1>
+        <h1 className={classes.first}>All in one place</h1>
         <p className={classes.pitch}>
-          With TRACKr you can choose daily workout plans. You can record the
-          number of sets, reps, and weight of your workouts. Track your
-          progression to ensure you are pushing your limits every day.
+          Our app is the ultimate tool for achieving your fitness goals and
+          maintaining a healthy lifestyle. Not only does it provide personalized
+          workout plans and track your activity, but it also helps you monitor
+          your daily caloric intake.
         </p>
         <p className={classes.numHeader2}>05</p>
-        <h1 className={classes.second}>Eat healthy</h1>
+        <h1 className={classes.second}>Easy to use</h1>
         <p className={classes.pitch}>
-          It has never been easier to stay healthy! We help you stay on route by
-          keeping track of your daily carbs, fat,and protein intake.
+          Our website is designed to be user-friendly and intuitive, making it
+          easy for you to find what you need and accomplish your goals.
         </p>
       </div>
     </div>
