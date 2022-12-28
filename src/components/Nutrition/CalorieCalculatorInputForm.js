@@ -56,6 +56,11 @@ const CalorieCalculatorInputForm = ({
 
     const data = await res.json();
 
+    if (data === null) {
+      setFilteredDates([]);
+      return;
+    }
+
     const filteredDatesArr = Object.values(data).filter((date) => {
       return date.date.includes(
         e.getMonth() + 1 + "/" + e.getDate() + "/" + e.getFullYear()

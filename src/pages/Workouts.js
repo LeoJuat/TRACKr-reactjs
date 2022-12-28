@@ -130,7 +130,6 @@ const Workouts = () => {
     const data = await res.json();
 
     if (data === null) {
-      console.log("This is null");
       setFilteredDates([]);
       setIsLoading(false);
       return;
