@@ -2,6 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
+.gradientGray {
+  background-image: linear-gradient(
+      45deg,
+      rgba(0, 0, 0, 0.75),
+      rgba(154, 152, 152, 0.588)
+    ),
+    url(/src/imgs/running.webp);
+}
+
+.scrollRope {
+  background-image: linear-gradient(
+      -45deg,
+      rgba(0, 0, 0, 0.75),
+      rgba(154, 152, 152, 0.588)
+    ),
+    url(/src/imgs/scrollRope.webp);
+}
+
+.girlFight {
+  background-image: linear-gradient(
+      -45deg,
+      rgba(0, 0, 0, 0.588),
+      rgba(46, 46, 46, 0.75)
+    ),
+    url(/src/imgs/girlFight.webp);
+}
+
+.right {
+  grid-column: 2 / -1;
+}
+
 .hoverFill {
   background: linear-gradient(to left, white 50%, #3cd157 50%) right;
   background-size: 200%;

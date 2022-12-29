@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import Main from "./components/Main/Main";
 import { Navigate, Route, Routes } from "react-router-dom";
 import BetterSignUp from "./pages/BetterSignUp";
 import Login from "./pages/Login";
@@ -7,9 +6,10 @@ import Home from "./pages/Home";
 import AuthContext from "./store/auth-context";
 import Workouts from "./pages/Workouts";
 import Nutrition from "./pages/Nutrition";
+import Landing from "./components/Main/Landing";
 
 const publicRoutes = [
-  { path: "/", element: <Main /> },
+  { path: "/", element: <Landing /> },
   { path: "/sign-up", element: <BetterSignUp /> },
   { path: "/login", element: <Login /> },
   { path: "*", element: <Navigate to="/" /> },
