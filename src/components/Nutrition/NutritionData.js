@@ -24,11 +24,11 @@ const NutritionData = ({
   lowCarbPlanHandler,
 }) => {
   return (
-    <section className="mt-10 text-2xl font-medium text-white w-96">
+    <section className="mt-10 text-2xl font-medium text-white xl:w-96 mobileM:text-center">
       <div className="text-2xl font-semibold text-white">
         Daily intake: {Math.trunc(calories)} calories
       </div>
-      <div className="flex gap-8">
+      <div className="flex gap-8 xl:justify-start mobileM:justify-center">
         {!proteinPlan && (
           <div
             onClick={proteinPlanHandler}
@@ -52,7 +52,7 @@ const NutritionData = ({
           </div>
         )}
       </div>
-      <div className="flex gap-8 mb-10">
+      <div className="flex gap-8 mb-10 xl:justify-start mobileM:justify-center mobileM:pb-20 xl:pb-0">
         {!fatPlan && (
           <div
             onClick={lowFatPlanHandler}

@@ -14,7 +14,7 @@ const Landing = () => {
     <>
       <div className="flex sm:block">
         <MainHeader />
-        <section className="h-full bg-center bg-cover md:fixed md:w-1/2 px-14 gradientGray xl:py-36 md:py-60 md:px-10 lg:py-60 sm:static sm:w-full sm:py-80 mobileL:py-72 mobileM:py-72">
+        <section className="h-full bg-center bg-cover md:fixed md:w-1/2 xl:px-14 gradientGray xl:py-36 md:py-60 md:px-10 lg:py-60 sm:static sm:w-full sm:py-80 mobileL:py-72 mobileM:py-72 sm:px-14 mobileM:px-14">
           <div className="lg:mt-0 xl:mt-24">
             <p className="text-gray-400 font-[Caveat] xl:text-4xl lg:text-2xl md:text-3xl sm:text-3xl mobileL:text-3xl mobileM:text-3xl">
               01
@@ -22,7 +22,7 @@ const Landing = () => {
             <h1 className="mt-2 font-sans font-bold text-green-500 xl:text-5xl lg:text-3xl md:text-lg mobileL:text-2xl mobileM:text-2xl">
               Welcome to TRACKr!
             </h1>
-            <p className="mt-4 font-semibold text-white md:leading-5 xl:mb-10 xl:text-lg lg:mb-5 lg:text-base md:text-base md:mb-5 sm:mb-8 mobileL:mb-8 mobileM:mb-8">
+            <p className="mt-4 font-semibold text-white md:leading-7 xl:mb-10 xl:text-lg lg:mb-5 lg:text-base md:text-base md:mb-5 sm:mb-8 mobileL:mb-8 mobileM:mb-8">
               TRACKr is a fitness site to help track everything from workouts to
               calories. Our goal is to help you track your progression in AND
               out of the gym! Track your calories, macros, and your progression
@@ -79,7 +79,7 @@ const Landing = () => {
             <p className="text-gray-400 font-[Caveat] sm:text-4xl mobileL:text-4xl sm:text-end mobileL:text-start mobileM:text-4xl">
               02
             </p>
-            <h1 className="mt-2 font-sans font-bold text-green-500 sm:text-end mobileL:text-start mobileM:text-4xl mobileL:text-5xl md:text-3xl">
+            <h1 className="mt-2 font-sans font-bold text-green-500 lg:text-5xl sm:text-end mobileL:text-start mobileM:text-4xl mobileL:text-5xl md:text-3xl">
               Track your workouts
             </h1>
             <p className="mt-4 mb-10 text-lg font-semibold text-white">
@@ -89,7 +89,7 @@ const Landing = () => {
             </p>
           </div>
           <p className="text-gray-400 font-[Caveat] text-4xl">03</p>
-          <h1 className="mt-2 font-sans font-bold text-green-500 mobileM:text-4xl mobileL:text-5xl md:text-3xl">
+          <h1 className="mt-2 font-sans font-bold text-green-500 mobileM:text-4xl lg:text-5xl mobileL:text-5xl md:text-3xl">
             Eat healthy
           </h1>
           <p className="mt-4 mb-10 text-lg font-semibold text-white">
@@ -103,7 +103,7 @@ const Landing = () => {
             <p className="text-gray-400 font-[Caveat] sm:text-4xl mobileL:text-4xl sm:text-end mobileL:text-start mobileM:text-4xl">
               04
             </p>
-            <h1 className="mt-2 font-sans font-bold text-green-500 sm:text-end mobileL:text-start mobileM:text-4xl mobileL:text-5xl md:text-3xl">
+            <h1 className="mt-2 font-sans font-bold text-green-500 sm:text-end mobileL:text-start mobileM:text-4xl mobileL:text-5xl md:text-3xl lg:text-5xl">
               Easy to use
             </h1>
             <p className="mt-4 mb-10 text-lg font-semibold text-white">
@@ -112,7 +112,7 @@ const Landing = () => {
             </p>
           </div>
           <p className="text-gray-400 font-[Caveat] text-4xl">05</p>
-          <h1 className="mt-2 font-sans font-bold text-green-500 mobileM:text-4xl md:text-3xl mobileL:text-5xl ">
+          <h1 className="mt-2 font-sans font-bold text-green-500 mobileM:text-4xl md:text-3xl mobileL:text-5xl lg:text-5xl">
             All in one place
           </h1>
           <p className="mt-4 mb-10 text-lg font-semibold text-white">

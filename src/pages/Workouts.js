@@ -148,7 +148,7 @@ const Workouts = () => {
   return (
     <div>
       <LoggedInHeader />
-      <div className="w-[83%] h-auto gradient mt-10 mx-auto grid grid-cols-2 justify-items-center shadow-2xl rounded-lg">
+      <div className="w-[83%] h-auto gradient mt-10 mx-auto lg:grid lg:grid-cols-2 justify-items-center shadow-2xl rounded-lg md:flex-col">
         <div className="flex flex-col self-center mb-10 ml-5">
           {isLoading && (
             <p className="mt-20 text-center text-white mb-36">Loading...</p>
@@ -164,16 +164,16 @@ const Workouts = () => {
           {!filteredDates?.length &&
             !isLoading &&
             !selectedExercises?.length && (
-              <h1 className="mx-10 text-3xl font-semibold text-white">
+              <h1 className="mx-10 text-3xl font-semibold text-white lg:mt-0 md:mt-20 md:text-center mobileM:mt-20 mobileM:text-center lg:text-left">
                 Please choose a workout down below to start tracking! 💪
               </h1>
             )}
         </div>
         <Tooltip
           title="Click on a date to see past progress!"
-          placement="right"
+          placement="bottom"
         >
-          <div className="py-10">
+          <div className="py-10 lg:block mobileM:flex mobileM:justify-center">
             <Calendar
               className="rounded-md "
               calendarType="US"

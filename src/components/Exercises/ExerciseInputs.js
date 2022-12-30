@@ -44,7 +44,7 @@ const ExerciseInputs = ({
   return selectedExercises?.map((exercise, index) => {
     return (
       <React.Fragment key={index}>
-        <h1 className="mt-10 text-lg font-semibold text-white">
+        <h1 className="mt-10 text-lg font-semibold text-white lg:px-0 md:px-5">
           Input your reps/weight and save progress before choosing another
           exercise or Click on the name if you want to delete the exercise.
         </h1>
@@ -60,7 +60,7 @@ const ExerciseInputs = ({
           />
           <button
             onClick={() => saveHandler(exercise, sets)}
-            className="z-10 w-full px-3 py-1 mt-10 font-medium text-white transition-all duration-200 bg-blue-500 border-2 border-white w-6/6 rounded-3xl hover:bg-blue-600 hover:text-white"
+            className="z-10 px-3 py-1 mt-10 font-medium text-white transition-all duration-200 bg-blue-500 border-2 border-white w-6/6 rounded-3xl hover:bg-blue-600 hover:text-white lg:w-full mobileM:w-[95%]"
           >
             Save progress
           </button>
@@ -108,7 +108,7 @@ const ExerciseInput = ({
               onChange={(e) => handleSetChange(e.target.value, "weight", index)}
               type="number"
               placeholder="Weight"
-              className="px-1 py-2 ml-5 border-2 border-gray-300 rounded-md "
+              className="px-1 py-2 border-2 border-gray-300 rounded-md xl:ml-5 xl:inline lg:inline-block lg:ml-20 lg:mt-3 md:inline-block md:ml-20 md:mt-3 mobileM:inline-block mobileM:ml-20 mobileM:mt-3 xl:mt-0"
             />
             <span className="ml-2 text-white">lbs</span>
           </form>

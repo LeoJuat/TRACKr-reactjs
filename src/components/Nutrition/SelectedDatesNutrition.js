@@ -2,7 +2,7 @@ import React from "react";
 
 const SelectedDatesNutrition = ({ filteredDates }) => {
   return (
-    <div className="flex-col gap-5 mt-24 mb-10">
+    <div className="flex-col gap-5 mt-24 mb-10 xl:text-start mobileM:pt-20 xl:pt-0 mobileM:text-center">
       <h1 className="text-3xl font-semibold text-white">
         Calories:{" "}
         {filteredDates[filteredDates.length - 1]?.calories
