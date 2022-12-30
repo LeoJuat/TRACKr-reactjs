@@ -93,7 +93,7 @@ const Login = () => {
   return (
     <React.Fragment>
       <div className="h-screen bg-gray-300">
-        <header className="w-10">
+        <header className="w-full md:px-10 md:py-8 mobileM:px-10 sm:px-6 mobileM:pt-6">
           <Link
             className="font-sans text-4xl font-bold cursor-pointer hoverFillSignUp hover:bg-left"
             to="/"

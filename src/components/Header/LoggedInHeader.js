@@ -12,15 +12,15 @@ const LoggedInHeader = () => {
   };
 
   return (
-    <header>
+    <header className="flex items-center justify-between px-10 py-8">
       <Link
         className="font-sans text-4xl font-bold cursor-pointer hoverFillSignUp hover:bg-left"
         to="/"
       >
         TRACKr
       </Link>
-      <div className="flex items-center gap-10">
-        <div onClick={signoutHandler} className="w-5 h-5 cursor-pointer ">
+      <div>
+        <div onClick={signoutHandler} className="w-5 h-5 cursor-pointer">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
             <path d="M15 24H1c-.6 0-1-.4-1-1V1c0-.6.4-1 1-1h14c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1s-1-.4-1-1V2H2v20h12v-6c0-.6.4-1 1-1s1 .4 1 1v7c0 .6-.4 1-1 1z" />
             <path d="M23 13H8c-.6 0-1-.4-1-1s.4-1 1-1h15c.6 0 1 .4 1 1s-.4 1-1 1z" />
