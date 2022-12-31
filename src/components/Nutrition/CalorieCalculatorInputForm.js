@@ -110,7 +110,7 @@ const CalorieCalculatorInputForm = ({
             {clicked && (
               <div>
                 <h1 className="mx-5 text-3xl font-semibold text-white xl:w-[26.5rem] xl:text-start mobileM:text-center mobileM:w-[90%] mobileM:pt-16 xl:pt-0 sm:ml-5 mobileM:ml-1">
-                  Choose a plan on the right to submit your daily intake! 👉
+                  Choose a plan to submit your daily intake! 📆
                 </h1>
               </div>
             )}
@@ -173,7 +173,7 @@ const CalorieCalculatorInputForm = ({
                     <select
                       defaultValue={"DEFAULT"}
                       required
-                      className="px-1 py-[0.60rem] border-2 border-gray-300 rounded-md mobileM:w-5/6 md:w-60"
+                      className="px-1 py-[0.60rem] border-2 border-gray-300 rounded-md mobileM:w-5/6 md:w-60 mobileM:mb-[14px] sm:mb-0"
                       id="gender"
                       name="gender"
                       onChange={(e) => setGender(e.target.value)}
@@ -195,7 +195,7 @@ const CalorieCalculatorInputForm = ({
                     <select
                       defaultValue={"DEFAULT"}
                       required
-                      className="px-1 py-[0.60rem] border-2 border-gray-300 rounded-md mobileM:w-5/6 md:w-60"
+                      className="px-1 py-[0.60rem] border-2 border-gray-300 rounded-md mobileM:w-5/6 md:w-60 mobileM:mb-[14px] sm:mb-0"
                       id="level"
                       name="level"
                       onChange={(e) => setLevel(e.target.value)}
@@ -221,7 +221,7 @@ const CalorieCalculatorInputForm = ({
                     <select
                       defaultValue={"DEFAULT"}
                       required
-                      className="px-1 py-[0.60rem] border-2 border-gray-300 rounded-md mobileM:w-5/6 md:w-60"
+                      className="px-1 py-[0.60rem] border-2 border-gray-300 rounded-md mobileM:w-5/6 md:w-60 mobileM:mb-[14px] sm:mb-0"
                       id="goal"
                       name="goal"
                       onChange={(e) => setGoal(e.target.value)}
@@ -285,7 +285,7 @@ const CalorieCalculatorInputForm = ({
         {filteredDates ? (
           <SelectedDatesNutrition filteredDates={filteredDates} />
         ) : (
-          <h1 className="px-20 text-3xl font-semibold text-center text-white mt-36 xl:pt-0 mobileM:pt-20">
+          <h1 className="text-3xl font-semibold text-center text-white sm:px-20 mt-36 xl:pt-0 mobileM:pt-20 mobileM:px-16">
             Click on a date to see past progress! 🗓
           </h1>
         )}
