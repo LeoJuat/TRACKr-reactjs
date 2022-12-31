@@ -109,7 +109,7 @@ const CalorieCalculatorInputForm = ({
           <div className="flex flex-col self-center mt-10 mb-10 ml-5">
             {clicked && (
               <div>
-                <h1 className="mx-5 text-3xl font-semibold text-white xl:w-[26.5rem] xl:text-start mobileM:text-center mobileM:w-[90%] mobileM:pt-16 xl:pt-0">
+                <h1 className="mx-5 text-3xl font-semibold text-white xl:w-[26.5rem] xl:text-start mobileM:text-center mobileM:w-[90%] mobileM:pt-16 xl:pt-0 sm:ml-5 mobileM:ml-1">
                   Choose a plan on the right to submit your daily intake! 👉
                 </h1>
               </div>
@@ -129,7 +129,7 @@ const CalorieCalculatorInputForm = ({
                       onChange={(e) => setAge(e.target.value)}
                       type="number"
                       placeholder="Age"
-                      className="px-1 py-2 border-2 border-gray-300 rounded-md"
+                      className="px-1 py-2 border-2 border-gray-300 rounded-md mobileM:w-5/6 md:w-60"
                     />
                     <br />
                     <label
@@ -143,7 +143,7 @@ const CalorieCalculatorInputForm = ({
                       onChange={(e) => setHeight(e.target.value)}
                       type="number"
                       placeholder="Height in cm"
-                      className="px-1 py-2 border-2 border-gray-300 rounded-md"
+                      className="px-1 py-2 border-2 border-gray-300 rounded-md mobileM:w-5/6 md:w-60"
                     />
                     <br />
                     <label
@@ -157,7 +157,7 @@ const CalorieCalculatorInputForm = ({
                       onChange={(e) => setWeight(e.target.value)}
                       type="number"
                       placeholder="Weight in kg"
-                      className="px-1 py-2 border-2 border-gray-300 rounded-md"
+                      className="px-1 py-2 border-2 border-gray-300 rounded-md mobileM:w-5/6 md:w-60"
                     />
                   </form>
                 </div>
@@ -289,7 +289,7 @@ const CalorieCalculatorInputForm = ({
             Click on a date to see past progress! 🗓
           </h1>
         )}
-        <div className="flex flex-col self-center py-10 mt-10 mb-10 ml-5 mobileM:flex-row mobileM:justify-center">
+        <div className="flex flex-col self-center py-10 mt-10 mb-10 mobileL:ml-5 mobileM:flex-row mobileM:justify-center mobileM:scale-[.85] mobileM:ml-0">
           <Tooltip
             title="Click on a date to see past progress!"
             placement="bottom"
