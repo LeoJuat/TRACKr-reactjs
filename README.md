@@ -1,4 +1,4 @@
-Welcome to TRACKr! 
+# Welcome to TRACKr! 
 
 ![TRACKR-landing](https://user-images.githubusercontent.com/100502573/210120901-e4571bf6-003e-4de0-b46e-fdf1e2e882c7.PNG)
 
