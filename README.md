@@ -34,4 +34,4 @@
 
 ![TRACKR-workout-pt4](https://user-images.githubusercontent.com/100502573/210120966-18dd2d72-784a-4816-9280-b04d83d3eab7.PNG)
 
-### Thank you for using our fitness app! We appreciate your commitment to improving your health and wellness, and we hope that our app has been a helpful ### tool in supporting you on your fitness journey. We value your feedback and suggestions, and we are constantly working to improve the app and provide ### you with the best possible experience. Thank you again for choosing our app, and we hope to continue supporting you in your fitness goals.
+### Thank you for using our fitness app! We appreciate your commitment to improving your health and wellness, and we hope that our app has been a helpful tool in supporting you on your fitness journey. We value your feedback and suggestions, and we are constantly working to improve the app and provide you with the best possible experience. Thank you again for choosing our app, and we hope to continue supporting you in your fitness goals.
